@@ -1,0 +1,19 @@
+<%- include("head") %>
+<main class="form-signin w-200 m-auto container">
+  <form action="/entry" method="POST">
+    <h1 class="h3 mb-3 fw-normal centered text-center">Enter username and room code</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="name" placeholder="Username">
+      <label for="floatingInput">Username</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="code" placeholder="Room Code">
+      <label for="floatingPassword">Room Code</label>
+    </div>
+
+    
+    <button class="btn btn-primary w-100 py-2" type="submit">Go!</button>
+  </form>
+</main>
+<%- include("foot") %>
