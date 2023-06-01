@@ -6,7 +6,7 @@ module.exports = function (app, db, joi) {
   app.post("/entry", async (req, res) => {
     const code = req.body.code;
     const name = req.body.name;
-    const schema = Joi.string().max(20).required();
+    const schema = joi.string().max(20).required();
     const validationResult = schema.validate(name);
     if (validationResult.error != null) {
       console.log(validationResult.error + " in name");
