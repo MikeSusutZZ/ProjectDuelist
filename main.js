@@ -6,6 +6,8 @@ module.exports = function (app, db, joi) {
   app.post("/entry", async (req, res) => {
     const code = req.body.code;
     const name = req.body.name;
+
+    // check for hacks
     const schema = joi.string().max(20).required();
     const validationResult = schema.validate(name);
     if (validationResult.error != null) {
@@ -29,7 +31,7 @@ module.exports = function (app, db, joi) {
       }
       // join as player 2
       if (room.player2 == null) {
-        db.updateOne({ code: code }, { $set: { player2: new Player(name) } });
+        db.updateOne({ code: code }, { $set: { player2: new Player(name, 2) } });
         // enter game
         return;
       }
@@ -37,7 +39,7 @@ module.exports = function (app, db, joi) {
     } else {
       db.insertOne({
         code: code,
-        player1: new Player(name),
+        player1: new Player(name, 1),
         player2: null,
         p1action: null,
         p2action: null,
@@ -50,11 +52,13 @@ module.exports = function (app, db, joi) {
     res.render("roomFull");
   })
 
-  function Player(name) {
+  function Player(name, number) {
     this.name = name;
+    this.num = "player" + number;
     this.charged = false;
     this.stabbed = false;
     this.blockSpent = false;
     this.shieldCool = false;
+    this.health = 3;
   }
 };

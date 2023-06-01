@@ -1,10 +1,10 @@
 module.exports = function (app, db) {
   app.get("/play", async (req, res) => {
     const code = req.query.code;
-    const playerNum = req.query.player;
+    const yourNum = req.query.player;
     const room = db.findOne({ code: code });
     // validate query hasn't been tampered with
-    if (room.player1 != playerNum && room.player2 != playerNum) {
+    if (room.player1 != yourNum && room.player2 != yourNum) {
       res.redirect("lobbyError");
       return;
     }
@@ -12,18 +12,29 @@ module.exports = function (app, db) {
     // set opponent
     const you = null;
     const opp = null;
-    if (playerNum == player1) {
+    const oppChoice = null;
+    if (yourNum == player1) {
       if (room.player2 == null) {
         res.redirect("waiting");
         return;
       } else {
         opp = room.player2;
+        oppChoice = room.p2action;
         you = room.player1;
       }
     } else {
       opp = room.player1;
+      oppChoice = room.p1action;
       you = room.player2;
     }
-    res.render("board", { you: you, opp: opp });
+    if(you.health < 1){
+      res.render("loose");
+      return;
+    }
+    if(opp.health < 1){
+      res.render("win");
+      return;
+    }
+    res.render("board", { you: you, opp: opp, oppChoice: oppChoice });
   });
 };

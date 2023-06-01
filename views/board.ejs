@@ -1,0 +1,22 @@
+<%- include("head") %>
+<% if(oppChoice == null) { %>
+    <h3 class="text-centered">Waiting on opponent's choice</h3> 
+<% } else { %>
+    <h3 class="text-centered">Opponent is ready!</h3>
+<% } %>
+
+
+<% if(you.shieldCool == false) {%>
+    <%- include("cards/shield") %>
+<% } %>
+<% if(you.blockSpent == false) {%>
+    <%- include("cards/block") %>
+    <%- include("card/rush") %>
+<% } %>
+<%- include("cards/stab") %>
+<% if(you.charged == false) {%>
+    <%- include("cards/charge") %>
+<% } else { %>
+    <%- include("cards/shoot")
+    <% } %>
+<%- include("foot") %>
