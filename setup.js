@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const joi = require('joi');
 
 const mongodb_host = process.env.MONGODB_HOST;
 const mongodb_user = process.env.MONGODB_USER;
@@ -16,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 
 const db = database.db(mongodb_database).collection("Rooms");
 
-require("./main")(app, db); // Pass app and db as parameters to main.js
+require("./main")(app, db, joi); // Pass app and db as parameters to main.js
 require("./game")(app, db);
 
 const port = process.env.PORT || 3000;
