@@ -5,18 +5,25 @@
     <h3 class="text-centered">Opponent is ready!</h3>
 <% } %>
 
+<div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
+    <div class="list-group list-group-checkable d-grid gap-2 border-0">
+        <% if(you.shieldCool == false) {%>
+            <%- include("cards/shield") %>
+        <% } %>
+        <% if(you.blockSpent == false) {%>
+            <%- include("cards/block") %>
+            <%- include("card/rush") %>
+        <% } %>
+        <% if(you.parrySpent == false) {%>
+            <%- include("cards/parry") %>
+        <% } %>
+        <%- include("cards/stab") %>
+        <% if(you.charged == false) {%>
+            <%- include("cards/charge") %>
+        <% } else { %>
+            <%- include("cards/shoot")
+            <% } %>
+    </div>
+  </div>
 
-<% if(you.shieldCool == false) {%>
-    <%- include("cards/shield") %>
-<% } %>
-<% if(you.blockSpent == false) {%>
-    <%- include("cards/block") %>
-    <%- include("card/rush") %>
-<% } %>
-<%- include("cards/stab") %>
-<% if(you.charged == false) {%>
-    <%- include("cards/charge") %>
-<% } else { %>
-    <%- include("cards/shoot")
-    <% } %>
 <%- include("foot") %>

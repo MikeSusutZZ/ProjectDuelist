@@ -58,6 +58,7 @@ module.exports = function (app, db, joi) {
     this.charged = false;
     this.stabbed = false;
     this.blockSpent = false;
+    this.parrySpent = false;
     this.shieldCool = false;
     this.health = 3;
   }
