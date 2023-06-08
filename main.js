@@ -9,15 +9,15 @@ module.exports = function (app, db, joi) {
 
     // check for hacks
     const schema = joi.string().max(20).required();
-    const validationResult = schema.validate(name);
+    var validationResult = schema.validate(name);
     if (validationResult.error != null) {
-      console.log(validationResult.error + " in name");
+      console.log(validationResult.error + " in name: " + name);
       res.redirect("/");
       return;
     }
     validationResult = schema.validate(code);
     if (validationResult.error != null) {
-      console.log(validationResult.error + " in code");
+      console.log(validationResult.error + " in code: " + code);
       res.redirect("/");
       return;
     }
