@@ -10,6 +10,11 @@ module.exports = function (app, db) {
       return;
     }
 
+    //check if both players have entered
+    if(room.player1action != null && room.player2action != null){
+      res.redirect("/result");
+    }
+
     // set opponent
     const you = null;
     const opp = null;

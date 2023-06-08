@@ -1,7 +1,6 @@
 {
   "name": "projectduelist",
   "version": "1.0.0",
-  "description": "",
   "main": "main.js",
   "scripts": {
     "start": "nodemon setup.js"
@@ -17,5 +16,15 @@
     "joi": "^17.9.2",
     "mongodb": "^5.5.0",
     "nodemon": "^2.0.22"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MikeSusutZZ/ProjectDuelist.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MikeSusutZZ/ProjectDuelist/issues"
+  },
+  "homepage": "https://github.com/MikeSusutZZ/ProjectDuelist#readme",
+  "description": ""
 }
