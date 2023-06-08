@@ -26,35 +26,30 @@ module.exports = function (app, db, joi) {
     if (room) {
       // Room is full
       if (room.player1 == name || player2 == name) {
-        res.redirect("/full");
+        res.render("full");
         return;
       }
       // join as player 2
       if (room.player2 == null) {
-        db.updateOne({ code: code }, { $set: { player2: new Player(name, 2) } });
-        // enter game
+        db.updateOne({ code: code }, { $set: { player2: new Player(name) } });
+        res.redirect(`/play?code=${code}&player=${name}`);
         return;
       }
       // Make new room
     } else {
       db.insertOne({
         code: code,
-        player1: new Player(name, 1),
+        player1: new Player(name),
         player2: null,
         p1action: null,
         p2action: null,
       });
-      //enter game
+      res.redirect(`/play?code=${code}&player=${name}`);
     }
   });
 
-  app.get("/full", (req, res) => {
-    res.render("roomFull");
-  })
-
-  function Player(name, number) {
+  function Player(name) {
     this.name = name;
-    this.num = "player" + number;
     this.charged = false;
     this.stabbed = false;
     this.blockSpent = false;
