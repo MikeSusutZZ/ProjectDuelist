@@ -43,6 +43,7 @@ module.exports = function (app, db, joi) {
         player2: null,
         player1action: null,
         player2action: null,
+        createdAt: new Date()
       });
       res.redirect(`/play?code=${code}&name=${name}&num=player1`);
     }

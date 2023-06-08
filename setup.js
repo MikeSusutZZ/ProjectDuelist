@@ -16,6 +16,7 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 
 const db = database.db(mongodb_database).collection("Rooms");
+db.createIndex({ "createdAt": 1 }, { expireAfterSeconds: 86400 });
 
 require("./main")(app, db, joi); // Pass app and db as parameters to main.js
 require("./game")(app, db);
