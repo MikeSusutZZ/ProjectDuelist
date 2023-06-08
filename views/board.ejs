@@ -5,7 +5,7 @@
     <h3 class="text-centered">Opponent is ready!</h3>
 <% } %>
 <% if(yourChoice == null) { %>
-    <form action="/submit" method="POST">
+    <form action="/submit?code=<%- code %>&name=<%- name %>&num=<$- num %>" method="POST" id="choice">
     <div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
         <div class="list-group list-group-checkable d-grid gap-2 border-0">
             <% if(you.shieldCool == false) {%>
@@ -30,7 +30,7 @@
     </form>
 <% } else { %>
     <div class="text-centered">
-    <h3> You chose <%- yourChoice %></h3>
-    <button onclick="window.location.href='/play?code=<%- code %>&player=<%- name %>'" type="button" class="btn btn-outline-secondary btn-lg px-4">Refresh</button>
+        <h3> You chose <%- yourChoice %></h3>
+        <button onclick="window.location.href='/play?code=<%- code %>&name=<%- name %>&num=<$- num %>'" type="button" class="btn btn-outline-secondary btn-lg px-4">Refresh</button>
     </div>
 <%- include("foot") %>

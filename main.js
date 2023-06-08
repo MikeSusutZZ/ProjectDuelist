@@ -31,25 +31,26 @@ module.exports = function (app, db, joi) {
       }
       // join as player 2
       if (room.player2 == null) {
-        db.updateOne({ code: code }, { $set: { player2: new Player(name) } });
-        res.redirect(`/play?code=${code}&player=${name}`);
+        db.updateOne({ code: code }, { $set: { player2: new Player(name, 2) } });
+        res.redirect(`/play?code=${code}&name=${name}&num=player2`);
         return;
       }
       // Make new room
     } else {
       db.insertOne({
         code: code,
-        player1: new Player(name),
+        player1: new Player(name, 1),
         player2: null,
-        p1action: null,
-        p2action: null,
+        player1action: null,
+        player2action: null,
       });
-      res.redirect(`/play?code=${code}&player=${name}`);
+      res.redirect(`/play?code=${code}&name=${name}&num=player1`);
     }
   });
 
-  function Player(name) {
+  function Player(name, n) {
     this.name = name;
+    this.num = "player" + n;
     this.charged = false;
     this.stabbed = false;
     this.blockSpent = false;
