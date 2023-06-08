@@ -22,7 +22,7 @@
             <% if(you.charged == false) {%>
                 <%- include("cards/charge") %>
             <% } else { %>
-                <%- include("cards/shoot")
+                <%- include("cards/shoot") %>
                 <% } %>
         </div>
     </div>
@@ -33,4 +33,5 @@
         <h3> You chose <%- yourChoice %></h3>
         <button onclick="window.location.href='/play?code=<%- code %>&name=<%- name %>&num=<$- num %>'" type="button" class="btn btn-outline-secondary btn-lg px-4">Refresh</button>
     </div>
+    <% } %>
 <%- include("foot") %>

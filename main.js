@@ -25,13 +25,13 @@ module.exports = function (app, db, joi) {
     const room = await db.findOne({ code: code });
     if (room) {
       // Room is full
-      if (room.player1 == name || player2 == name) {
+      if (room.player1 != null && room.player2 != null) {
         res.render("full");
         return;
       }
       // join as player 2
       if (room.player2 == null) {
-        db.updateOne({ code: code }, { $set: { player2: new Player(name, 2) } });
+        await db.updateOne({ code: code }, { $set: { player2: new Player(name, 2) } });
         res.redirect(`/play?code=${code}&name=${name}&num=player2`);
         return;
       }
@@ -49,7 +49,7 @@ module.exports = function (app, db, joi) {
   });
 
   function Player(name, n) {
-    this.name = name;
+    this.name = "" + name;
     this.num = "player" + n;
     this.charged = false;
     this.stabbed = false;

@@ -3,7 +3,7 @@ module.exports = function (app, db) {
     const code = req.query.code;
     const num = req.query.num;
     const name = req.query.name;
-    const room = db.findOne({ code: code });
+    const room = await db.findOne({ code: code });
     // validate query hasn't been tampered with
     if (room[num].name != name) {
       res.redirect("lobbyError");
@@ -16,13 +16,13 @@ module.exports = function (app, db) {
     }
 
     // set opponent
-    const you = null;
-    const opp = null;
-    const yourChoice = null;
-    const oppChoice = null;
-    if (num == player1) {
+    var you = null;
+    var opp = null;
+    var yourChoice = null;
+    var oppChoice = null;
+    if (num == "player1") {
       if (room.player2 == null) {
-        res.redirect("/waiting");
+        res.redirect(`/waiting?code=${code}&name=${name}&num=${num}`);
         return;
       } else {
         opp = room.player2;
@@ -47,8 +47,12 @@ module.exports = function (app, db) {
     res.render("board", { you: you, yourChoice: yourChoice, opp: opp, oppChoice: oppChoice, code: code, name: name });
   });
 
+  //doesn't have these vars yet
   app.get("/waiting", (req, res) => {
-    res.render("waiting", {code: code, name: yourName, num: num});
+    const code = req.query.code;
+    const num = req.query.num;
+    const name = req.query.name;
+    res.render("waiting", {code: code, name: name, num: num});
   })
 
   app.post("/submit", async (req, res) => {
