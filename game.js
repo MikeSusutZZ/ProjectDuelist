@@ -37,6 +37,8 @@ module.exports = function (app, db) {
       you = room.player2;
       yourChoice = room.player2action;
     }
+    console.log("you\n" + you);
+    console.log("opp\n" + opp);
     res.render("board", { you: you, yourChoice: yourChoice, opp: opp, oppChoice: oppChoice, code: code, name: name });
   });
 
