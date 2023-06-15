@@ -55,7 +55,7 @@ module.exports = function (app, db) {
             if (oppPick == "Shield" || oppPick == "Block") {
                 message = "Your attack was defended";
             } else {
-                await hurt(oppNum, opp);
+                await hurt(opp);
             }
             if (oppPick == "Stab" || oppPick == "Rush") {
                 message = "You shot your opponent as they were coming to attack you";
@@ -74,7 +74,7 @@ module.exports = function (app, db) {
             } else if (oppPick == "Shoot") {
                 message = "You were shot before you could reach your opponent";
             } else {
-                await hurt(oppNum, opp)
+                await hurt(opp)
                 message = "You rushed down and killed your opponent"
             }
 
@@ -86,7 +86,7 @@ module.exports = function (app, db) {
             } else if (oppPick == "Shoot") {
                 message = "You were shot before you could reach your opponent";
             } else if (opp.stabbed) {
-                await hurt(oppNum, opp);
+                await hurt(opp);
                 message = "You landed the finishing blow";
                 if (oppPick == "Stab" && !you.stabbed) {
                     message += " as they wounded you"
