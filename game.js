@@ -12,7 +12,8 @@ module.exports = function (app, db) {
 
     //check if both players have entered
     if(room.player1action != null && room.player2action != null){
-      res.redirect("/result");
+      res.redirect(`/result?code=${code}&name=${name}&num=${num}`);
+      return;
     }
 
     // set opponent
@@ -35,14 +36,6 @@ module.exports = function (app, db) {
       oppChoice = room.player1action;
       you = room.player2;
       yourChoice = room.player2action;
-    }
-    if(you.health < 1){
-      res.render("loose");
-      return;
-    }
-    if(opp.health < 1){
-      res.render("win");
-      return;
     }
     res.render("board", { you: you, yourChoice: yourChoice, opp: opp, oppChoice: oppChoice, code: code, name: name });
   });

@@ -20,6 +20,7 @@ db.createIndex({ "createdAt": 1 }, { expireAfterSeconds: 86400 });
 
 require("./main")(app, db, joi); // Pass app and db as parameters to main.js
 require("./game")(app, db);
+require("./result")(app, db);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
