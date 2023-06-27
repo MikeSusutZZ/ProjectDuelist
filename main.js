@@ -32,7 +32,14 @@ module.exports = function (app, db, joi) {
       // join as player 2
       if (room.player2 == null) {
         await db.updateOne({ code: code }, { $set: { player2: new Player(name, 2) } });
-        res.redirect(`/play?code=${code}&name=${name}&num=player2`);
+        // Set the session variables
+        req.session.code = code;
+        req.session.name = name;
+        req.session.num = 'player2';
+
+        // Redirect to the desired route
+        res.redirect('/play');
+
         return;
       }
       // Make new room
@@ -45,7 +52,14 @@ module.exports = function (app, db, joi) {
         player2action: null,
         createdAt: new Date()
       });
-      res.redirect(`/play?code=${code}&name=${name}&num=player1`);
+      // Set the session variables
+      req.session.code = code;
+      req.session.name = name;
+      req.session.num = 'player1';
+
+      // Redirect to the desired route
+      res.redirect('/play');
+
     }
   });
 

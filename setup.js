@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const session = require('express-session');
 const app = express();
 const joi = require('joi');
 
@@ -14,6 +15,12 @@ const database = new MongoClient(atlasURI, { useNewUrlParser: true, useUnifiedTo
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
+app.use(session({
+    secret: 'your_secret_key',
+    resave: false,
+    saveUninitialized: true
+  }));
+  
 
 const db = database.db(mongodb_database).collection("Rooms");
 db.createIndex({ "createdAt": 1 }, { expireAfterSeconds: 86400 });
