@@ -1,7 +1,7 @@
 {
   "name": "projectduelist",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "setup.js",
   "scripts": {
     "start": "nodemon setup.js"
   },
