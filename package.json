@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon setup.js"
   },
-  "author": "Mike Susut",
+  "author": "Mike Susut, ZippidyZap",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.3.0",
