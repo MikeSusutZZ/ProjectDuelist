@@ -10,7 +10,7 @@ const mongodb_password = process.env.MONGODB_PASSWORD;
 const mongodb_database = process.env.MONGODB_DATABASE;
 
 const MongoClient = require("mongodb").MongoClient;
-const atlasURI = `mongodb+srv://${mongodb_user}:${mongodb_password}@${mongodb_host}/${mongodb_database}/?retryWrites=true`;
+const atlasURI = `mongodb+srv://${mongodb_user}:${mongodb_password}@${mongodb_host}/?retryWrites=true`;
 const database = new MongoClient(atlasURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.set('view engine', 'ejs');
@@ -22,8 +22,10 @@ app.use(session({
   }));
   
 
+await database.connect();
 const db = database.db(mongodb_database).collection("Rooms");
-db.createIndex({ "createdAt": 1 }, { expireAfterSeconds: 86400 });
+await db.createIndexes([{ key: { "createdAt": 1 }, expireAfterSeconds: 86400 }]);
+
 
 require("./main")(app, db, joi); // Pass app and db as parameters to main.js
 require("./game")(app, db);
