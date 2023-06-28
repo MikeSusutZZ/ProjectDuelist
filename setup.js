@@ -1,3 +1,5 @@
+require("./utils.js");
+
 require("dotenv").config();
 const express = require("express");
 const session = require('express-session');
@@ -9,10 +11,6 @@ const mongodb_user = process.env.MONGODB_USER;
 const mongodb_password = process.env.MONGODB_PASSWORD;
 const mongodb_database = process.env.MONGODB_DATABASE;
 
-const MongoClient = require("mongodb").MongoClient;
-const atlasURI = `mongodb+srv://${mongodb_user}:${mongodb_password}@${mongodb_host}/?retryWrites=true`;
-const database = new MongoClient(atlasURI, { useNewUrlParser: true, useUnifiedTopology: true });
-
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
@@ -21,10 +19,9 @@ app.use(session({
     saveUninitialized: true
   }));
   
-
-await database.connect();
+var { database } = include("databaseConnection");
 const db = database.db(mongodb_database).collection("Rooms");
-await db.createIndexes([{ key: { "createdAt": 1 }, expireAfterSeconds: 86400 }]);
+
 
 
 require("./main")(app, db, joi); // Pass app and db as parameters to main.js
