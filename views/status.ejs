@@ -1,0 +1,18 @@
+<div class="text-center">
+    <h3><%= player.name %>'s status</h3>
+    <ul>
+        <li>Charged: <%= player.charged ? '<span class="material-symbols-sharp">check_circle</span>' : '<span class="material-symbols-sharp">radio_button_unchecked</span>' %></li>
+        <li>Stabbed: <%= player.stabbed ? '<span class="material-symbols-sharp">check_circle</span>' : '<span class="material-symbols-sharp">radio_button_unchecked</span>' %></li>
+        <li>Block Spent: <%= player.blockSpent ? '<span class="material-symbols-sharp">check_circle</span>' : '<span class="material-symbols-sharp">radio_button_unchecked</span>' %></li>
+        <li>Parry Spent: <%= player.parrySpent ? '<span class="material-symbols-sharp">check_circle</span>' : '<span class="material-symbols-sharp">radio_button_unchecked</span>' %></li>
+        <li>Shield Cooling: <%= player.shieldCool ? '<span class="material-symbols-sharp">check_circle</span>' : '<span class="material-symbols-sharp">radio_button_unchecked</span>' %></li>
+        <li>Health:
+          <% for (var i = 0; i < player.health; i++) { %>
+            <span class="material-symbols-sharp">favorite</span>
+          <% } %>
+          <% for (var i = player.health; i < 3; i++) { %>
+            <span class="material-symbols-sharp">heart_broken</span>
+          <% } %>
+        </li>
+      </ul>
+</div>
